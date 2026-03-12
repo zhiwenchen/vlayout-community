@@ -24,19 +24,18 @@
 
 package com.alibaba.android.vlayout;
 
-import android.graphics.Rect;
+
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.vlayout.layout.LayoutChunkResult;
 
 import java.util.LinkedList;
 import java.util.List;
-
-import static com.alibaba.android.vlayout.VirtualLayoutManager.LayoutStateWrapper;
 
 /**
  * Helper class to handle different layouts in {@link VirtualLayoutManager}
@@ -239,7 +238,7 @@ public abstract class LayoutHelper {
     public abstract void setItemCount(int itemCount);
 
     public abstract void doLayout(RecyclerView.Recycler recycler, RecyclerView.State state,
-                                  LayoutStateWrapper layoutState, LayoutChunkResult result,
+                                  VirtualLayoutManager.LayoutStateWrapper layoutState, LayoutChunkResult result,
                                   LayoutManagerHelper helper);
 
     public void onRefreshLayout(RecyclerView.State state, VirtualLayoutManager.AnchorInfoWrapper anchorInfo, LayoutManagerHelper helper) {

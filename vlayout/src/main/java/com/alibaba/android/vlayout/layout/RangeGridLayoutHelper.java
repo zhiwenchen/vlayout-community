@@ -24,13 +24,13 @@
 
 package com.alibaba.android.vlayout.layout;
 
-import android.support.annotation.NonNull;
-import android.support.v4.util.ArrayMap;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.Recycler;
-import android.support.v7.widget.RecyclerView.State;
+import static android.widget.LinearLayout.VERTICAL;
+
 import android.util.Log;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.vlayout.LayoutManagerHelper;
 import com.alibaba.android.vlayout.OrientationHelperEx;
@@ -44,8 +44,6 @@ import com.alibaba.android.vlayout.layout.GridLayoutHelper.SpanSizeLookup;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-
-import static android.support.v7.widget.LinearLayoutManager.VERTICAL;
 
 /**
  * LayoutHelper provides RangeGridLayoutHelper. The difference with {@link GridLayoutHelper} is that this layoutHelper could has child group logically but implemented as flat.
@@ -509,7 +507,7 @@ public class RangeGridLayoutHelper extends BaseLayoutHelper {
         int startSpace = 0, endSpace = 0;
 
         int secondStartSpace = 0, secondEndSpace = 0;
-        boolean isLayoutEnd = layoutState.getLayoutDirection() == VirtualLayoutManager.LayoutStateWrapper.LAYOUT_END;
+        boolean isLayoutEnd = layoutState.getLayoutDirection() == LayoutStateWrapper.LAYOUT_END;
         final boolean isOverLapMargin = helper.isEnableMarginOverLap();
 
         if (isStartLine) {
@@ -695,8 +693,8 @@ public class RangeGridLayoutHelper extends BaseLayoutHelper {
     }
 
     @Override
-    public void afterLayout(Recycler recycler, State state, int startPosition, int endPosition, int scrolled,
-        LayoutManagerHelper helper) {
+    public void afterLayout(RecyclerView.Recycler recycler, RecyclerView.State state, int startPosition, int endPosition, int scrolled,
+                            LayoutManagerHelper helper) {
         mRangeStyle.afterLayout(recycler, state, startPosition, endPosition, scrolled, helper);
     }
 

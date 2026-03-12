@@ -24,23 +24,24 @@
 
 package com.alibaba.android.vlayout.layout;
 
+
+import static com.alibaba.android.vlayout.OrientationHelperEx.VERTICAL;
+
+import android.util.Log;
+import android.util.SparseIntArray;
+import android.view.View;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.alibaba.android.vlayout.LayoutManagerHelper;
 import com.alibaba.android.vlayout.OrientationHelperEx;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.VirtualLayoutManager.LayoutParams;
 import com.alibaba.android.vlayout.VirtualLayoutManager.LayoutStateWrapper;
 
-import android.support.annotation.NonNull;
-import android.support.v7.widget.OrientationHelper;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.util.SparseIntArray;
-import android.view.View;
-import android.widget.TextView;
-
 import java.util.Arrays;
-
-import static android.support.v7.widget.LinearLayoutManager.VERTICAL;
 
 
 /**
@@ -427,7 +428,7 @@ public class GridLayoutHelper extends BaseLayoutHelper {
                         Math.max(0, spanSize - 1) * (layoutInVertical ? mHGap : mVGap),
                     View.MeasureSpec.EXACTLY);
             }
-            final VirtualLayoutManager.LayoutParams lp = (VirtualLayoutManager.LayoutParams) view.getLayoutParams();
+            final LayoutParams lp = (LayoutParams) view.getLayoutParams();
 
             if (helper.getOrientation() == VERTICAL) {
                 helper.measureChildWithMargins(view, spec, getMainDirSpec(lp.height, mTotalSize,

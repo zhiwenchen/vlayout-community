@@ -24,14 +24,15 @@
 
 package com.alibaba.android.vlayout.layout;
 
+import static com.alibaba.android.vlayout.VirtualLayoutManager.VERTICAL;
+
+import android.view.View;
+
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.alibaba.android.vlayout.LayoutManagerHelper;
 import com.alibaba.android.vlayout.OrientationHelperEx;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
-
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
-
-import static com.alibaba.android.vlayout.VirtualLayoutManager.VERTICAL;
 
 /**
  * LayoutHelper contains only one view

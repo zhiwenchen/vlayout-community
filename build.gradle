@@ -22,29 +22,7 @@
  * SOFTWARE.
  */
 
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-
-buildscript {
-    repositories {
-        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
-        maven { url "http://oss.jfrog.org/oss-snapshot-local/" }
-        mavenCentral()
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.2'
-        classpath 'com.github.xfumihiro.view-inspector:view-inspector-plugin:0.1.1'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.4'
-        classpath 'org.jfrog.buildinfo:build-info-extractor-gradle:4.0.0'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
-    }
-}
-
-allprojects {
-    repositories {
-        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
-        maven { url "http://oss.jfrog.org/oss-snapshot-local/" }
-        jcenter()
-        mavenLocal()
-    }
+plugins {
+    id 'com.android.application' version '8.11.1' apply false
+    id 'com.android.library' version '8.11.1' apply false
 }

@@ -1,8 +1,11 @@
 package com.alibaba.android.vlayout.layout;
 
-import java.lang.reflect.Array;
-import java.util.HashMap;
-import java.util.Map;
+import android.graphics.Rect;
+import android.util.Log;
+import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.vlayout.LayoutManagerHelper;
 import com.alibaba.android.vlayout.OrientationHelperEx;
@@ -12,14 +15,9 @@ import com.alibaba.android.vlayout.layout.BaseLayoutHelper.DefaultLayoutViewHelp
 import com.alibaba.android.vlayout.layout.BaseLayoutHelper.LayoutViewBindListener;
 import com.alibaba.android.vlayout.layout.BaseLayoutHelper.LayoutViewUnBindListener;
 
-import android.graphics.Rect;
-import android.support.annotation.NonNull;
-import android.support.v4.util.ArrayMap;
-import android.support.v4.util.SimpleArrayMap;
-import android.support.v7.widget.OrientationHelper;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.View;
+import java.lang.reflect.Array;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by longerian on 2017/5/10.

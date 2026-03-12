@@ -22,28 +22,9 @@
  * SOFTWARE.
  */
 
-apply plugin: 'com.android.library'
-
-buildscript {
-    repositories {
-        maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
-        maven { url "http://oss.jfrog.org/oss-snapshot-local/" }
-        mavenCentral()
-        jcenter()
-    }
-
-    dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.0'
-    }
+plugins {
+    id 'com.android.library'
 }
-
-repositories {
-    maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
-    maven { url "http://oss.jfrog.org/oss-snapshot-local/" }
-    jcenter()
-    mavenLocal()
-}
-
 
 ext {
     bintrayRepo = 'Tangram'
@@ -66,26 +47,32 @@ ext {
 
     licenseName = 'MIT'
     licenseUrl = 'https://opensource.org/licenses/MIT'
-    allLicenses = ["MIT"]
+    allLicenses = ['MIT']
 }
 
-def VERSION = System.properties['version'] ?: '10'
-def VERSION_NAME = System.properties['versionName'] ?: '0.1.0'
+def artifactVersionCode = providers.systemProperty('version').orElse('10')
+def artifactVersionName = providers.systemProperty('versionName').orElse('0.1.0')
 
 android {
-    compileSdkVersion Integer.parseInt(System.properties['compileSdkVersion'] ?: '22')
-    buildToolsVersion System.properties['buildToolsVersion']
+    namespace 'com.alibaba.android.vlayout'
+    compileSdk Integer.parseInt(providers.gradleProperty('android.compileSdk').get())
 
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion Integer.parseInt(System.properties['targetSdkVersion'] ?: '14')
-        versionCode Integer.parseInt(VERSION ?: '10')
-        versionName VERSION_NAME
+        minSdk Integer.parseInt(providers.gradleProperty('android.minSdk').get())
+        targetSdk Integer.parseInt(providers.gradleProperty('android.targetSdk').get())
+        versionCode Integer.parseInt(artifactVersionCode.get())
+        versionName artifactVersionName.get()
+
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
+    }
+
+    buildFeatures {
+        buildConfig true
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_7
-        targetCompatibility JavaVersion.VERSION_1_7
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     buildTypes {
@@ -95,44 +82,33 @@ android {
         }
     }
 
-    lintOptions {
+    lint {
         abortOnError false
     }
-
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    // compile project(':extension')
-    if (project.hasProperty('useNewSupportLibrary')) {
-        compile 'com.android.support:recyclerview-v7:25.2.0@aar'
-        compile('com.android.support:support-v4:25.2.0@aar')
-        compile 'com.android.support:support-annotations:25.2.0'
-        compile 'com.android.support:support-compat:25.2.0'
-        compile 'com.android.support:support-core-ui:25.2.0'
-    } else {
-        compile 'com.android.support:recyclerview-v7:23.1.1@aar'
-        compile('com.android.support:support-v4:23.1.1@aar') {
-            exclude group: 'com.android.support', module: 'support-annotations'
-        }
-        compile 'com.android.support:support-annotations:23.1.1'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'androidx.appcompat:appcompat:1.7.1'
+    implementation 'com.google.android.material:material:1.13.0'
+
+    androidTestImplementation 'org.robolectric:robolectric:3.0'
+}
+
+if (project.findProperty('enableLegacyPublishScripts') == 'true') {
+    File deployConfig = rootProject.file('deploy.gradle')
+    if (deployConfig.exists()) {
+        apply from: deployConfig
     }
 
-    androidTestCompile "org.robolectric:robolectric:3.0"
-}
+    deployConfig = rootProject.file('jcenterInstall.gradle')
+    if (deployConfig.exists()) {
+        apply from: deployConfig
+    }
 
-
-File deployConfig = rootProject.file('deploy.gradle')
-if (deployConfig.exists()) {
-    apply from: rootProject.file('deploy.gradle')
-}
-
-deployConfig = rootProject.file('jcenterInstall.gradle')
-if (deployConfig.exists()) {
-    apply from: rootProject.file('jcenterInstall.gradle')
-}
-
-deployConfig = rootProject.file('jcenterDeploy.gradle')
-if (deployConfig.exists()) {
-    apply from: rootProject.file('jcenterDeploy.gradle')
+    deployConfig = rootProject.file('jcenterDeploy.gradle')
+    if (deployConfig.exists()) {
+        apply from: deployConfig
+    }
 }

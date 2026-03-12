@@ -28,16 +28,17 @@ import android.content.Context;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Trace;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.OrientationHelper;
-import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.OrientationHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.vlayout.extend.LayoutManagerCanScrollListener;
 import com.alibaba.android.vlayout.extend.PerformanceMonitor;
@@ -59,10 +60,10 @@ import java.util.Map;
 
 
 /**
- * A {@link android.support.v7.widget.RecyclerView.LayoutManager} implementation which provides
+ * A {@link androidx.recyclerview.widget.LinearLayoutManager} implementation which provides
  * a virtual layout for actual views.
  * <p>
- * NOTE: it will change {@link android.support.v7.widget.RecyclerView.RecycledViewPool}
+ * NOTE: it will change {@link RecyclerView.RecycledViewPool}
  * for RecyclerView.
  *
  * @author villadora
@@ -363,7 +364,7 @@ public class VirtualLayoutManager extends ExposeLinearLayoutManagerEx implements
     private AnchorInfoWrapper mTempAnchorInfoWrapper = new AnchorInfoWrapper();
 
     @Override
-    public void onAnchorReady(RecyclerView.State state, ExposeLinearLayoutManagerEx.AnchorInfo anchorInfo) {
+    public void onAnchorReady(RecyclerView.State state, AnchorInfo anchorInfo) {
         super.onAnchorReady(state, anchorInfo);
 
         boolean changed = true;
@@ -1503,11 +1504,11 @@ public class VirtualLayoutManager extends ExposeLinearLayoutManagerEx implements
         calculateItemDecorationsForChild(child, mDecorInsets);
         RecyclerView.LayoutParams lp = (RecyclerView.LayoutParams) child.getLayoutParams();
 
-        if (getOrientation() == VERTICAL) {
+        if (getOrientation() == RecyclerView.VERTICAL) {
             widthSpec = updateSpecWithExtra(widthSpec, lp.leftMargin + mDecorInsets.left,
                     lp.rightMargin + mDecorInsets.right);
         }
-        if (getOrientation() == HORIZONTAL) {
+        if (getOrientation() == RecyclerView.HORIZONTAL) {
             heightSpec = updateSpecWithExtra(heightSpec, mDecorInsets.top,
                     mDecorInsets.bottom);
         }
@@ -1646,7 +1647,7 @@ public class VirtualLayoutManager extends ExposeLinearLayoutManagerEx implements
         }
 
 
-        if (getOrientation() == VERTICAL) {
+        if (getOrientation() == RecyclerView.VERTICAL) {
             super.onMeasure(recycler, state, widthSpec, View.MeasureSpec.makeMeasureSpec(measuredSize, View.MeasureSpec.AT_MOST));
         } else {
             super.onMeasure(recycler, state, View.MeasureSpec.makeMeasureSpec(measuredSize, View.MeasureSpec.AT_MOST), heightSpec);

@@ -24,11 +24,20 @@
 
 package com.alibaba.android.vlayout.layout;
 
-import java.lang.ref.WeakReference;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.BitSet;
-import java.util.List;
+import static com.alibaba.android.vlayout.VirtualLayoutManager.HORIZONTAL;
+import static com.alibaba.android.vlayout.VirtualLayoutManager.LayoutParams;
+import static com.alibaba.android.vlayout.VirtualLayoutManager.LayoutStateWrapper.LAYOUT_END;
+import static com.alibaba.android.vlayout.VirtualLayoutManager.LayoutStateWrapper.LAYOUT_START;
+import static com.alibaba.android.vlayout.VirtualLayoutManager.VERTICAL;
+import static com.alibaba.android.vlayout.layout.StaggeredGridLayoutHelper.Span.INVALID_OFFSET;
+
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.core.view.ViewCompat;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.vlayout.BuildConfig;
 import com.alibaba.android.vlayout.LayoutHelper;
@@ -38,19 +47,11 @@ import com.alibaba.android.vlayout.Range;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.VirtualLayoutManager.LayoutStateWrapper;
 
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.LayoutParams;
-import android.util.Log;
-import android.view.View;
-
-import static android.support.v7.widget.LinearLayoutManager.INVALID_OFFSET;
-import static com.alibaba.android.vlayout.VirtualLayoutManager.HORIZONTAL;
-import static com.alibaba.android.vlayout.VirtualLayoutManager.LayoutStateWrapper.LAYOUT_END;
-import static com.alibaba.android.vlayout.VirtualLayoutManager.LayoutStateWrapper.LAYOUT_START;
-import static com.alibaba.android.vlayout.VirtualLayoutManager.VERTICAL;
+import java.lang.ref.WeakReference;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.BitSet;
+import java.util.List;
 
 /**
  * LayoutHelper provides waterfall.
@@ -250,7 +251,7 @@ public class StaggeredGridLayoutHelper extends BaseLayoutHelper {
                 break;
             }
 
-            VirtualLayoutManager.LayoutParams lp = (VirtualLayoutManager.LayoutParams) view.getLayoutParams();
+            LayoutParams lp = (LayoutParams) view.getLayoutParams();
 
             // find the span to put the view
             final int position = lp.getViewPosition();

@@ -1,8 +1,9 @@
 package com.alibaba.android.vlayout;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Created by longerian on 2017/6/6.
@@ -58,7 +59,7 @@ abstract public class OrientationHelperEx {
      *
      * @param view The view element to check
      * @return The first pixel of the element
-     * @see #getDecoratedEnd(android.view.View)
+     * @see #getDecoratedEnd(View)
      */
     public abstract int getDecoratedStart(View view);
 
@@ -70,7 +71,7 @@ abstract public class OrientationHelperEx {
      *
      * @param view The view element to check
      * @return The last pixel of the element
-     * @see #getDecoratedStart(android.view.View)
+     * @see #getDecoratedStart(View)
      */
     public abstract int getDecoratedEnd(View view);
 

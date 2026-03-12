@@ -24,18 +24,19 @@
 
 package com.alibaba.android.vlayout.layout;
 
-import com.alibaba.android.vlayout.LayoutManagerHelper;
-import com.alibaba.android.vlayout.OrientationHelperEx;
-import com.alibaba.android.vlayout.VirtualLayoutManager;
+import static com.alibaba.android.vlayout.VirtualLayoutManager.VERTICAL;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.ViewPropertyAnimator;
 
-import static com.alibaba.android.vlayout.VirtualLayoutManager.VERTICAL;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.alibaba.android.vlayout.LayoutManagerHelper;
+import com.alibaba.android.vlayout.OrientationHelperEx;
+import com.alibaba.android.vlayout.VirtualLayoutManager;
 
 
 /**

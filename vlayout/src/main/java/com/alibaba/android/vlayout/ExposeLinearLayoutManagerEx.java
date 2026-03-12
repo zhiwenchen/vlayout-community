@@ -29,19 +29,18 @@ import android.content.Context;
 import android.graphics.PointF;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.support.v4.view.ViewCompat;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.OrientationHelper;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+
+import androidx.core.view.ViewCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.OrientationHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
-
-import com.alibaba.android.vlayout.VirtualLayoutManager.LayoutParams;
 
 /**
  * This class is used to expose layoutChunk method, should not be used in anywhere else
@@ -86,7 +85,7 @@ class ExposeLinearLayoutManagerEx extends LinearLayoutManager {
     /**
      * Many calculations are made depending on orientation. To keep it clean, this interface
      * helps {@link LinearLayoutManager} make those decisions.
-     * Based on {@link #mOrientation}, an implementation is lazily created in
+     * an implementation is lazily created in
      * {@link #ensureLayoutStateExpose} method.
      */
     private OrientationHelperEx mOrientationHelper;
@@ -163,6 +162,7 @@ class ExposeLinearLayoutManagerEx extends LinearLayoutManager {
             throw new RuntimeException(e);
         }
         try {
+            setItemPrefetchEnabled(false);
             // FIXME in the future
             Method setItemPrefetchEnabledMethod = RecyclerView.LayoutManager.class
                     .getDeclaredMethod("setItemPrefetchEnabled", boolean.class);
@@ -241,7 +241,7 @@ class ExposeLinearLayoutManagerEx extends LinearLayoutManager {
      */
     private void myResolveShouldLayoutReverse() {
         // A == B is the same result, but we rather keep it readable
-        if (getOrientation() == VERTICAL || !isLayoutRTL()) {
+        if (getOrientation() == RecyclerView.VERTICAL || !isLayoutRTL()) {
             mShouldReverseLayoutExpose = getReverseLayout();
         } else {
             mShouldReverseLayoutExpose = !getReverseLayout();
@@ -255,7 +255,7 @@ class ExposeLinearLayoutManagerEx extends LinearLayoutManager {
         }
         final int firstChildPos = getPosition(getChildAt(0));
         final int direction = targetPosition < firstChildPos != mShouldReverseLayoutExpose ? -1 : 1;
-        if (getOrientation() == HORIZONTAL) {
+        if (getOrientation() == RecyclerView.HORIZONTAL) {
             return new PointF(direction, 0);
         } else {
             return new PointF(0, direction);
@@ -941,7 +941,7 @@ class ExposeLinearLayoutManagerEx extends LinearLayoutManager {
     @Override
     public int scrollHorizontallyBy(int dx, RecyclerView.Recycler recycler,
                                     RecyclerView.State state) {
-        if (getOrientation() == VERTICAL) {
+        if (getOrientation() == RecyclerView.VERTICAL) {
             return 0;
         }
         return scrollInternalBy(dx, recycler, state);
@@ -953,7 +953,7 @@ class ExposeLinearLayoutManagerEx extends LinearLayoutManager {
     @Override
     public int scrollVerticallyBy(int dy, RecyclerView.Recycler recycler,
                                   RecyclerView.State state) {
-        if (getOrientation() == HORIZONTAL) {
+        if (getOrientation() == RecyclerView.HORIZONTAL) {
             return 0;
         }
         return scrollInternalBy(dy, recycler, state);
@@ -1117,7 +1117,6 @@ class ExposeLinearLayoutManagerEx extends LinearLayoutManager {
      *                    parameter for now, rather than accessing {@link #mLayoutState}
      * @see #recycleViewsFromStartExpose(RecyclerView.Recycler, int)
      * @see #recycleViewsFromEndExpose(RecyclerView.Recycler, int)
-     * @see LinearLayoutManager.LayoutState#mLayoutDirection
      */
     private void recycleByLayoutStateExpose(RecyclerView.Recycler recycler, LayoutState layoutState) {
         if (!layoutState.mRecycle) {
@@ -1225,7 +1224,7 @@ class ExposeLinearLayoutManagerEx extends LinearLayoutManager {
         measureChildWithMargins(view, 0, 0);
         result.mConsumed = mOrientationHelper.getDecoratedMeasurement(view);
         int left, top, right, bottom;
-        if (getOrientation() == VERTICAL) {
+        if (getOrientation() == RecyclerView.VERTICAL) {
             if (isLayoutRTL()) {
                 right = getWidth() - getPaddingRight();
                 left = right - mOrientationHelper.getDecoratedMeasurementInOther(view);

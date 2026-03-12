@@ -24,19 +24,18 @@
 
 package com.alibaba.android.vlayout.layout;
 
+import static android.widget.LinearLayout.VERTICAL;
+
+import android.util.Log;
+import android.view.View;
+
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.alibaba.android.vlayout.LayoutManagerHelper;
 import com.alibaba.android.vlayout.OrientationHelperEx;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.VirtualLayoutManager.AnchorInfoWrapper;
 import com.alibaba.android.vlayout.VirtualLayoutManager.LayoutParams;
-
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.State;
-import android.util.Log;
-import android.view.View;
-
-import static android.support.v7.widget.LinearLayoutManager.VERTICAL;
-
 
 /**
  * LayoutHelper layouts views as linear/ListView
@@ -95,7 +94,7 @@ public class LinearLayoutHelper extends BaseLayoutHelper {
         }
         final boolean isOverLapMargin = helper.isEnableMarginOverLap();
 
-        VirtualLayoutManager.LayoutParams params = (VirtualLayoutManager.LayoutParams) view.getLayoutParams();
+        LayoutParams params = (LayoutParams) view.getLayoutParams();
         final boolean layoutInVertical = helper.getOrientation() == VERTICAL;
 
         int startSpace = 0, endSpace = 0, gap = 0;
@@ -218,7 +217,7 @@ public class LinearLayoutHelper extends BaseLayoutHelper {
     }
 
     @Override
-    public void checkAnchorInfo(State state, AnchorInfoWrapper anchorInfo, LayoutManagerHelper helper) {
+    public void checkAnchorInfo(RecyclerView.State state, AnchorInfoWrapper anchorInfo, LayoutManagerHelper helper) {
         super.checkAnchorInfo(state, anchorInfo, helper);
         mLayoutWithAnchor = true;
     }

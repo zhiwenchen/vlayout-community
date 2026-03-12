@@ -24,6 +24,14 @@
 
 package com.alibaba.android.vlayout.layout;
 
+import android.graphics.Rect;
+import android.util.Log;
+import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.alibaba.android.vlayout.LayoutHelper;
 import com.alibaba.android.vlayout.LayoutManagerHelper;
 import com.alibaba.android.vlayout.OrientationHelperEx;
@@ -31,15 +39,8 @@ import com.alibaba.android.vlayout.R;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.VirtualLayoutManager.LayoutStateWrapper;
 
-import android.graphics.Rect;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
-import android.view.View;
-
 /**
- * {@link com.alibaba.android.vlayout.LayoutHelper} that provides basic methods
+ * {@link LayoutHelper} that provides basic methods
  */
 public abstract class BaseLayoutHelper extends MarginLayoutHelper {
 
@@ -206,7 +207,7 @@ public abstract class BaseLayoutHelper extends MarginLayoutHelper {
                         mLayoutRegion.right = helper.getContentWidth() - helper.getPaddingRight() - mMarginRight;
                     } else {
                         mLayoutRegion.top = helper.getPaddingTop() + mMarginTop;
-                        mLayoutRegion.bottom = helper.getContentHeight() - helper.getPaddingBottom() - mMarginBottom;
+                        mLayoutRegion.bottom = helper.getContentWidth() - helper.getPaddingBottom() - mMarginBottom;
                     }
 
                     bindLayoutView(mLayoutView);
@@ -271,7 +272,7 @@ public abstract class BaseLayoutHelper extends MarginLayoutHelper {
     }
 
     /**
-     * Called when {@link com.alibaba.android.vlayout.LayoutHelper} get dropped
+     * Called when {@link LayoutHelper} get dropped
      * Do default clean jobs defined by framework
      *
      * @param helper LayoutManagerHelper
@@ -292,7 +293,7 @@ public abstract class BaseLayoutHelper extends MarginLayoutHelper {
     }
 
     /**
-     * Called when {@link com.alibaba.android.vlayout.LayoutHelper} get dropped, do clean custom jobs
+     * Called when {@link LayoutHelper} get dropped, do clean custom jobs
      *
      * @param helper
      */

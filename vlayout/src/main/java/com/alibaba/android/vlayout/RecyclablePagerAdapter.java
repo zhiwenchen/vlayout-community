@@ -24,11 +24,12 @@
 
 package com.alibaba.android.vlayout;
 
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import com.alibaba.android.vlayout.extend.InnerRecycledViewPool;
 
@@ -81,14 +82,7 @@ public abstract class RecyclablePagerAdapter<VH extends RecyclerView.ViewHolder>
         //so the attributes of layoutParam such as widthFactor and position will also be reused,
         //while these attributes should be reset to default value during reused.
         //Considering ViewPager.LayoutParams has a few inner attributes which could not be modify outside, we provide a new instance here
-
-        ViewPager.LayoutParams layoutParams = new ViewPager.LayoutParams();
-        if (holder.itemView.getLayoutParams() != null) {
-            layoutParams.width = holder.itemView.getLayoutParams().width;
-            layoutParams.height = holder.itemView.getLayoutParams().height;
-        }
-
-        container.addView(holder.itemView, layoutParams);
+        container.addView(holder.itemView, new ViewPager.LayoutParams());
 
         return holder;
     }

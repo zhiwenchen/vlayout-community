@@ -24,23 +24,24 @@
 
 package com.alibaba.android.vlayout.layout;
 
-import com.alibaba.android.vlayout.LayoutManagerHelper;
-import com.alibaba.android.vlayout.OrientationHelperEx;
-import com.alibaba.android.vlayout.VirtualLayoutManager;
+import static com.alibaba.android.vlayout.VirtualLayoutManager.VERTICAL;
+import static com.alibaba.android.vlayout.layout.FixLayoutHelper.BOTTOM_LEFT;
+import static com.alibaba.android.vlayout.layout.FixLayoutHelper.BOTTOM_RIGHT;
+import static com.alibaba.android.vlayout.layout.FixLayoutHelper.TOP_RIGHT;
 
 import android.animation.ObjectAnimator;
 import android.graphics.Rect;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 
-import static com.alibaba.android.vlayout.VirtualLayoutManager.VERTICAL;
-import static com.alibaba.android.vlayout.layout.FixLayoutHelper.BOTTOM_LEFT;
-import static com.alibaba.android.vlayout.layout.FixLayoutHelper.BOTTOM_RIGHT;
-import static com.alibaba.android.vlayout.layout.FixLayoutHelper.TOP_RIGHT;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.alibaba.android.vlayout.LayoutManagerHelper;
+import com.alibaba.android.vlayout.OrientationHelperEx;
+import com.alibaba.android.vlayout.VirtualLayoutManager;
 
 /**
  * LayoutHelper that will be located as fix position at first layout, but its position could be changed by dragingg and dropping
