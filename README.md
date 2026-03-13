@@ -1,5 +1,3 @@
-# Attention. This project is not maintained any more !!!
-
 # vlayout
 
 [中文文档](README-ch.md)
